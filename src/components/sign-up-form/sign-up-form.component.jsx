@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
@@ -19,35 +19,30 @@ const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
 
-  useEffect(() => {
-    console.log(formFields);
-  }, [formFields]);
-
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
     if (password !== confirmPassword) {
       alert("Passwords do not match");
       return;
     }
-    try {
-      const { user } = await createAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
-
-      await createUserDocumentFromAuth(user, { displayName });
-      resetFormFields();
-    } catch (error) {
-      if (error.code === "auth/email-already-in-use") {
-        alert("Email already in use. Please use a different Email Id");
-      }
-      console.log("user creation encountered an error", error);
-    }
+    createAuthUserWithEmailAndPassword(email, password)
+      .then(({ user }) => {
+        createUserDocumentFromAuth(user, { displayName });
+      })
+      .then(() => {
+        resetFormFields();
+      })
+      .catch((error) => {
+        if (error.code === "auth/email-already-in-use") {
+          alert("Email already in use. Please use a different Email Id");
+        }
+        console.log("user creation encountered an error", error);
+      });
   };
 
   const handleChange = (event) => {
