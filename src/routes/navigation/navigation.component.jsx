@@ -18,7 +18,16 @@ const Navigation = () => {
         <Link className="logo-container" to="/">
           <CrwnLogo className="logo" />
         </Link>
+
         <div className="links-container">
+          {currentUser && (
+            <div className="user-name">{`Hello, ${
+              currentUser.displayName
+                ? currentUser.displayName
+                : currentUser.email
+            }`}</div>
+          )}
+
           <Link className="nav-link" to="/shop">
             SHOP
           </Link>
