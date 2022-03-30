@@ -1,12 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
-import Button from "../button/button.component";
+import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 
 import FormInput from "../form-input/form-input.component";
-import "./sign-up-form.styles.scss";
+import { SignUpContainer } from "./sign-up-form.styles.jsx";
 
 const defaultFormFields = {
   displayName: "",
@@ -18,6 +19,8 @@ const defaultFormFields = {
 const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
+
+  const navigate = useNavigate();
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -36,10 +39,13 @@ const SignUpForm = () => {
       })
       .then(() => {
         resetFormFields();
+        navigate("/");
       })
       .catch((error) => {
         if (error.code === "auth/email-already-in-use") {
           alert("Email already in use. Please use a different Email Id");
+        } else if (error.code === "auth/weak-password") {
+          alert("Password should be atleast 6 characters");
         }
         console.log("user creation encountered an error", error);
       });
@@ -51,7 +57,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className="sign-up-container">
+    <SignUpContainer>
       <h2>Don't have an account ?</h2>
       <span>Sign Up with your email and password</span>
       <form onSubmit={handleSubmit}>
@@ -91,11 +97,11 @@ const SignUpForm = () => {
           value={confirmPassword}
         />
 
-        <Button type="submit" buttonType="default">
+        <Button type="submit" buttonType={BUTTON_TYPE_CLASSES.base}>
           Sign Up
         </Button>
       </form>
-    </div>
+    </SignUpContainer>
   );
 };
 

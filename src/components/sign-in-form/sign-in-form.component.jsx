@@ -1,11 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   signInAuthUserWithEmailAndPassword,
   signInWithGooglePopup,
 } from "../../utils/firebase/firebase.utils";
-import Button from "../button/button.component";
+import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
-import "./sign-in-form.styles.scss";
+import { SignInContainer, ButtonsContainer } from "./sign-in-form.styles.jsx";
 
 const defaultFormFields = {
   email: "",
@@ -16,6 +17,8 @@ const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
 
+  const navigate = useNavigate();
+
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
@@ -23,6 +26,7 @@ const SignInForm = () => {
   const signInWithGoogle = async () => {
     try {
       await signInWithGooglePopup();
+      navigate("/");
     } catch (error) {
       switch (error.code) {
         case "auth/popup-closed-by-user":
@@ -36,28 +40,31 @@ const SignInForm = () => {
     }
   };
 
-  const onSubmitHandler = async (event) => {
+  const onSubmitHandler = (event) => {
     event.preventDefault();
-    try {
-      await signInAuthUserWithEmailAndPassword(email, password);
-      resetFormFields();
-    } catch (error) {
-      switch (error.code) {
-        case "auth/user-not-found":
-          alert(
-            "User not found. Please retry or sign up if you don't have an account"
-          );
-          break;
-        case "auth/wrong-password":
-          alert(
-            "Password entered is invalid. Please retry with right password"
-          );
-          break;
-        default:
-          console.log(error);
-          break;
-      }
-    }
+
+    signInAuthUserWithEmailAndPassword(email, password)
+      .then(() => {
+        resetFormFields();
+        navigate("/");
+      })
+      .catch((error) => {
+        switch (error.code) {
+          case "auth/user-not-found":
+            alert(
+              "User not found. Please retry or sign up if you don't have an account"
+            );
+            break;
+          case "auth/wrong-password":
+            alert(
+              "Password entered is invalid. Please retry with right password"
+            );
+            break;
+          default:
+            console.log(error);
+            break;
+        }
+      });
   };
 
   const handleChange = (event) => {
@@ -66,7 +73,7 @@ const SignInForm = () => {
   };
 
   return (
-    <div className="sign-in-container">
+    <SignInContainer>
       <h2>Already have an account ?</h2>
       <span>Sign In with your email and password</span>
       <form onSubmit={onSubmitHandler}>
@@ -86,16 +93,20 @@ const SignInForm = () => {
           name="password"
           value={password}
         />
-        <div className="buttons-container">
-          <Button type="submit" buttonType="default">
+        <ButtonsContainer>
+          <Button type="submit" buttonType={BUTTON_TYPE_CLASSES.base}>
             Sign In
           </Button>
-          <Button type="button" onClick={signInWithGoogle} buttonType="google">
+          <Button
+            type="button"
+            onClick={signInWithGoogle}
+            buttonType={BUTTON_TYPE_CLASSES.google}
+          >
             Google Sign In
           </Button>
-        </div>
+        </ButtonsContainer>
       </form>
-    </div>
+    </SignInContainer>
   );
 };
 
