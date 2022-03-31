@@ -13,7 +13,7 @@ const Checkout = () => {
 
   useEffect(() => {
     setIsCartOpen(false);
-  }, [setIsCartOpen]);
+  }, []);
 
   return (
     <CheckoutContainer>
