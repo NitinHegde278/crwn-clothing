@@ -67,6 +67,9 @@ export const getCategoriesAndDocuments = async () => {
   const collectionRef = collection(db, "categories");
   const q = query(collectionRef);
 
+  //Error handling test
+  // await Promise.reject("Unable to fetch products. Refresh the page");
+
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
 };
