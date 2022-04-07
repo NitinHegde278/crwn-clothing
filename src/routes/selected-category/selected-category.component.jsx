@@ -27,7 +27,7 @@ const SelectedCategory = () => {
       window.location.reload();
     }
     setProducts(categoriesMap[category]);
-  }, [category, categoriesMap]);
+  }, [category, categoriesMap, error]);
 
   return (
     <Fragment>

@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import {
-  signInAuthUserWithEmailAndPassword,
-  signInWithGooglePopup,
-} from "../../utils/firebase/firebase.utils";
+  emailSignInStart,
+  googleSignInStart,
+} from "../../store/user/user.action";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
 import { SignInContainer, ButtonsContainer } from "./sign-in-form.styles.jsx";
@@ -14,57 +14,22 @@ const defaultFormFields = {
 };
 
 const SignInForm = () => {
+  const dispatch = useDispatch();
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
-
-  const navigate = useNavigate();
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
 
-  const signInWithGoogle = async () => {
-    try {
-      await signInWithGooglePopup();
-      navigate("/");
-    } catch (error) {
-      switch (error.code) {
-        case "auth/popup-closed-by-user":
-          alert("Google authentication failed. Try again");
-          break;
-
-        default:
-          console.log(error);
-          break;
-      }
-    }
+  const signInWithGoogle = () => {
+    dispatch(googleSignInStart());
   };
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-
-    signInAuthUserWithEmailAndPassword(email, password)
-      .then(() => {
-        resetFormFields();
-        navigate("/");
-      })
-      .catch((error) => {
-        switch (error.code) {
-          case "auth/user-not-found":
-            alert(
-              "User not found. Please retry or sign up if you don't have an account"
-            );
-            break;
-          case "auth/wrong-password":
-            alert(
-              "Password entered is invalid. Please retry with right password"
-            );
-            break;
-          default:
-            console.log(error);
-            break;
-        }
-      });
+    dispatch(emailSignInStart(email, password));
+    resetFormFields();
   };
 
   const handleChange = (event) => {
