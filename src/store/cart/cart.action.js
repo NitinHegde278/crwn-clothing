@@ -55,3 +55,7 @@ export const removeItemFromCheckout = (cartItems, checkoutItemToRemove) => {
   const newCartItems = removeFromCheckout(cartItems, checkoutItemToRemove);
   return createAction(CART_ACTION_TYPE.UPDATE_CART, newCartItems);
 };
+
+export const clearCartItems = () => {
+  return createAction(CART_ACTION_TYPE.CLEAR_CART);
+};

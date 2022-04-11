@@ -1,6 +1,7 @@
 import { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CheckoutItem from "../../components/checkout-item/checkout-item.component";
+import PaymentForm from "../../components/payment-form/payment-form.component";
 import { setIsCartOpen } from "../../store/cart/cart.action";
 import {
   selectCartItems,
@@ -46,7 +47,8 @@ const Checkout = () => {
           {cartItems.map((cartItem) => {
             return <CheckoutItem cartItem={cartItem} key={cartItem.id} />;
           })}
-          <Total>Total: ${cartTotal}</Total>
+          <Total>Total: &#x20B9; {cartTotal}</Total>
+          <PaymentForm />
         </Fragment>
       ) : (
         "Your cart is empty!!!"
