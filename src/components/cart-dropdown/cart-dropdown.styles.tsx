@@ -23,6 +23,11 @@ export const CartItems = styled.div`
   &::-webkit-scrollbar-thumb {
     background-color: #cccccc;
   }
+
+  @media screen and (max-width: 800px) {
+    padding: 30px;
+    height: 100%;
+  }
 `;
 
 export const CartDropdownContainer = styled.div`
@@ -42,5 +47,11 @@ export const CartDropdownContainer = styled.div`
   ${GoogleSignInButton},
   ${InvertedButton} {
     margin-top: auto;
+  }
+
+  @media screen and (max-width: 800px) {
+    height: 100%;
+    width: 100%;
+    right: 3px;
   }
 `;

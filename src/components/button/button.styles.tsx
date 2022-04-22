@@ -36,6 +36,11 @@ export const GoogleSignInButton = styled(BaseButton)`
     background-color: #0062ff;
     border: none;
   }
+
+  @media screen and (max-width: 800px) {
+    text-align: center;
+    line-height: 15px;
+  }
 `;
 
 export const InvertedButton = styled(BaseButton)`

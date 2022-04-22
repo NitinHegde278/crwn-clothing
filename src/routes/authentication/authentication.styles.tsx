@@ -5,4 +5,13 @@ export const AuthenticationContainer = styled.div`
   justify-content: space-between;
   width: 900px;
   margin: -10px auto;
+
+  @media screen and (max-width: 800px) {
+    flex-direction: column;
+    width: unset;
+    align-items: center;
+    *:first-child {
+      margin-bottom: 50px;
+    }
+  }
 `;

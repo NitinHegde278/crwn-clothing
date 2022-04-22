@@ -7,11 +7,22 @@ export const NavigationContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 25px;
+
+  @media screen and (max-width: 800px) {
+    height: 60px;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
 `;
 export const LogoContainer = styled(Link)`
   height: 100%;
   width: 70px;
   padding: 25px;
+
+  @media screen and (max-width: 800px) {
+    width: 50px;
+    padding: 0;
+  }
 `;
 export const LinksContainer = styled.div`
   width: 50%;
@@ -19,6 +30,10 @@ export const LinksContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+
+  @media screen and (max-width: 800px) {
+    width: 80%;
+  }
 `;
 export const NavLink = styled(Link)`
   padding: 10px 15px;
@@ -27,4 +42,9 @@ export const NavLink = styled(Link)`
 export const UserName = styled.div`
   position: absolute;
   left: 45%;
+
+  @media screen and (max-width: 640px) {
+    margin-top: 80px;
+    left: 40%;
+  }
 `;

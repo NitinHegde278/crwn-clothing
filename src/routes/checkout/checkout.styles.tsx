@@ -29,4 +29,9 @@ export const Total = styled.span`
   margin-top: 30px;
   margin-left: auto;
   font-size: 36px;
+
+  @media screen and (max-width: 800px) {
+    font-size: 25px;
+    margin-bottom: 40px;
+  }
 `;

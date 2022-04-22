@@ -8,6 +8,15 @@ export const CartItemContainer = styled.div`
 
   img {
     width: 30%;
+
+    @media screen and (max-width: 800px) {
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    height: 100%;
+    width: 100%;
   }
 `;
 

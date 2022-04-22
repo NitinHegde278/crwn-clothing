@@ -18,6 +18,10 @@ export const ProductCardContainer = styled.div`
     height: 95%;
     object-fit: cover;
     margin-bottom: 5px;
+
+    @media screen and (max-width: 720px) {
+      margin-top: 25px;
+    }
   }
 
   ${BaseButton},
@@ -28,6 +32,13 @@ export const ProductCardContainer = styled.div`
     position: absolute;
     top: 255px;
     display: none;
+
+    @media screen and (max-width: 800px) {
+      display: block;
+      opacity: 0.9;
+      min-width: unset;
+      padding: 0 10px;
+    }
   }
 
   &:hover {

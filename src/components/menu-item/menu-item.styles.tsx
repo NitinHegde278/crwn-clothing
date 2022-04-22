@@ -24,6 +24,10 @@ export const Content = styled.div`
   background-color: white;
   opacity: 0.7;
   position: absolute;
+
+  @media screen and (min-width: 620px) and (max-width: 720px) {
+    width: 140px;
+  }
 `;
 
 type MenuItemContainerProps = {
@@ -77,5 +81,9 @@ export const MenuItemContainer = styled.div<MenuItemContainerProps>`
 
   &:last-child {
     margin-left: 7.5px;
+  }
+
+  @media screen and (max-width: 800px) {
+    width: 200px;
   }
 `;
