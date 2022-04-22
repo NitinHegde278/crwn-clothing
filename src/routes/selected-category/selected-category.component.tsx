@@ -8,7 +8,11 @@ import {
   selectCategoriesIsLoading,
   selectCategoriesMap,
 } from "../../store/categories/categories.selector";
-import { SelectedCategoryContainer, Title } from "./selected-category.styles";
+import {
+  CategoryDiv,
+  SelectedCategoryContainer,
+  Title,
+} from "./selected-category.styles";
 
 type SelectedRouteParams = {
   category: string;
@@ -31,7 +35,7 @@ const SelectedCategory = () => {
   }, [category, categoriesMap, error]);
 
   return (
-    <Fragment>
+    <CategoryDiv>
       <Title>{category}</Title>
       {isLoading ? (
         <Spinner />
@@ -43,7 +47,7 @@ const SelectedCategory = () => {
             })}
         </SelectedCategoryContainer>
       )}
-    </Fragment>
+    </CategoryDiv>
   );
 };
 export default SelectedCategory;

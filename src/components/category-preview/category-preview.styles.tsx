@@ -12,6 +12,9 @@ export const Title = styled.span`
   margin-bottom: 25px;
   cursor: pointer;
   text-transform: uppercase;
+  border: 1.5px solid;
+  border-radius: 8px;
+  padding: 5px;
 `;
 
 export const Preview = styled.div`

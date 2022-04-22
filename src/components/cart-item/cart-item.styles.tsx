@@ -9,14 +9,24 @@ export const CartItemContainer = styled.div`
   img {
     width: 30%;
 
-    @media screen and (max-width: 800px) {
-      width: 100%;
+    @media screen and (max-width: 720px) {
+      max-width: 60%;
+    }
+
+    @media screen and (max-width: 500px) {
+      min-width: 70%;
     }
   }
 
-  @media screen and (max-width: 800px) {
-    height: 100%;
+  @media screen and (max-width: 720px) {
+    height: 25%;
     width: 100%;
+    margin-left: 80px;
+  }
+
+  @media screen and (max-width: 500px) {
+    width: 70%;
+    margin-left: 50px;
   }
 `;
 
@@ -30,5 +40,14 @@ export const ItemDetails = styled.div`
 
   span {
     font-size: 16px;
+  }
+
+  @media screen and (max-width: 500px) {
+    padding: 10px 10px;
+    height: 180px;
+  }
+
+  @media screen and (max-width: 720px) {
+    width: 100%;
   }
 `;

@@ -49,9 +49,9 @@ export const CartDropdownContainer = styled.div`
     margin-top: auto;
   }
 
-  @media screen and (max-width: 800px) {
+  @media screen and (max-width: 720px) {
     height: 100%;
     width: 100%;
-    right: 3px;
+    right: 1px;
   }
 `;
